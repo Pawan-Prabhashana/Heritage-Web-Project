@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Add New Product</title>
+  <link rel="stylesheet" href="../assets/css/heritage.css">
+  <link rel="stylesheet" href="../assets/css/artisan.css">
+  <script src="../assets/vendor/chart.js/chart.umd.js"></script>
+
+
+  <style>
+    .hero {
+      position: relative;
+      z-index: 0;
+      margin-bottom: 14px;
+      overflow: hidden
+    }
+
+    .card,
+    .card-body,
+    
+      position: relative;
+      z-index: 1
+    }
+
+    .file-drop {
+      position: relative;
+      z-index: 2
+    }
+  </style>
+
+</head>
+
+<body class="artisan-app">
+
+  
+  <header class="header">
+    <div class="wrap"
+      style="display:flex;align-items:center;gap:14px;justify-content:space-between;max-width:var(--container);margin:0 auto;padding:12px">
+      <a href="/index.php" class="brand"
+        style="display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit">
+        <img class="logo" src="../assets/logo.png" alt="Heritage" style="height:40px;width:auto" />
+        <b>Heritage • Artisan</b>
+      </a>
+      <nav class="links" style="display:flex;gap:14px;align-items:center">
+        <a href="artisan-dashboard.html">Dashboard</a>
+        <a href="artisan-products.html">My Products</a>
+        <a class="btn btn-gold" href="artisan-product-new.html" style="padding:8px 12px;border-radius:999px">Add
+          Product</a>
+        <a href="artisan-experiences.html">My Experiences</a>
+        <a href="../index.php">Storefront</a>
+      </nav>
+    </div>
+  </header>
+  <div class="masthead-spacer"></div>
+  <script>
+    
+    const _hdr = document.querySelector('.header');
+    const _onS = () => _hdr && _hdr.classList.toggle('scrolled', window.scrollY > 4);
+    window.addEventListener('scroll', _onS); _onS();
+  </script>
+
+  <div class="artisan-container">
+    <div class="topbar">
+      <div class="brand">
+      </div>
+      <div class="actions">
+        <a class="btn" href="artisan-product-new.html">Add New Product</a>
+        <a class="btn" href="artisan-products.html">My Products</a>
+        <a class="btn" href="artisan-experiences.html">My Experiences</a>
+      </div>
+    </div>
+
+    <section class="hero">
+      <div class="flourish"></div>
+      <h1>Add a New Craft</h1>
+      <p>List your product and optionally offer a cultural experience with it.</p>
+    </section>
+    <div class="card" style="margin-top:12px">
+      <div class="card-body">
+        <form id="artisanProductCreateForm" id="addProductForm">
+          <div class="form-row">
+            <div><label>Title</label><input id="p_title" class="input" required placeholder="Eg: Indigo Handloom Saree">
+            </div>
+            <div><label>Category</label><select id="p_category" class="input"></select></div>
+            <div style="grid-column:1/-1"><label>Description</label><textarea id="p_desc" class="input" rows="5"
+                placeholder="Write about the craft, materials and story..."></textarea></div>
+            <div><label>Price (LKR)</label><input id="p_price" class="input" type="number" min="0" value="0"></div>
+            <div><label>Stock</label><input id="p_stock" class="input" type="number" min="0" value="1"></div>
+            <div style="grid-column:1/-1">
+              <label>Product Image</label>
+              <div id="fileDrop" data-input="fileInputHidden" class="file-drop">Click to upload product image</div>
+              <div id="previewBox" style="margin-top:10px"></div>
+            </div>
+          </div>
+
+          <div class="section-title" style="margin-top:16px">
+            <label style="display:flex;align-items:center;gap:10px">
+              <input id="chkExperience" type="checkbox" /> Offer an experience with this product
+            </label>
+          </div>
+
+          <div id="expBox" class="card" style="display:none; margin-top:8px">
+            <div class="card-body">
+              <div class="form-row-3 form-row">
+                <div><label>Experience Title</label><input id="x_title" class="input"
+                    placeholder="Weaving Basics (3h)" /></div>
+                <div><label>Date & Time</label><input id="x_date" class="input" type="datetime-local" /></div>
+                <div><label>Duration (hours)</label><input id="x_duration" class="input" type="number" min="1"
+                    value="3" /></div>
+                <div><label>Max Participants</label><input id="x_max" class="input" type="number" min="1" value="12" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:16px">
+            <a class="btn" href="artisan-products.html">Cancel</a>
+            <button class="btn btn-primary" type="submit">Save Product</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+  <div class="overlay"></div>
+  <div class="drawer"></div>
+  <script src="../assets/js/artisan.js"></script>
+
+  <script>
+    document.querySelectorAll('.btn').forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        var r = document.createElement('span');
+        var rect = this.getBoundingClientRect();
+        var x = e.clientX - rect.left; var y = e.clientY - rect.top;
+        r.className = 'ripple'; r.style.left = x + 'px'; r.style.top = y + 'px';
+        this.appendChild(r); setTimeout(function () { r.remove(); }, 600);
+      });
+    });
+  </script>
+
+</body>
+
+</html>

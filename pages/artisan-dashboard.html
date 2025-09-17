@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Artisan Dashboard</title>
+  <link rel="stylesheet" href="../assets/css/heritage.css">
+  <link rel="stylesheet" href="../assets/css/artisan.css">
+  <script src="../assets/vendor/chart.js/chart.umd.js"></script>
+
+</head>
+
+<body class="artisan-app">
+
+  
+  <header class="header">
+    <div class="wrap"
+      style="display:flex;align-items:center;gap:14px;justify-content:space-between;max-width:var(--container);margin:0 auto;padding:12px">
+      <a href="/index.php" class="brand"
+        style="display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit">
+        <img class="logo" src="../assets/logo.png" alt="Heritage" style="height:40px;width:auto" />
+        <b>Heritage • Artisan</b>
+      </a>
+      <nav class="links" style="display:flex;gap:14px;align-items:center">
+        <a href="artisan-dashboard.html">Dashboard</a>
+        <a href="artisan-products.html">My Products</a>
+        <a class="btn btn-gold" href="artisan-product-new.html" style="padding:8px 12px;border-radius:999px">Add
+          Product</a>
+        <a href="artisan-experiences.html">My Experiences</a>
+        <a href="../index.php">Storefront</a>
+      </nav>
+    </div>
+  </header>
+  <div class="masthead-spacer"></div>
+  <script>
+    
+    const _hdr = document.querySelector('.header');
+    const _onS = () => _hdr && _hdr.classList.toggle('scrolled', window.scrollY > 4);
+    window.addEventListener('scroll', _onS); _onS();
+  </script>
+
+  
+  <section class="hero">
+    <span class="kicker">Artisan Dashboard</span>
+    <div class="flourish"></div>
+    <h1 id="greeting">Ayubowan, Artisan!</h1>
+    <p>Manage your crafts, orders and cultural experiences with the same elegance as your creations.</p>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="kpi-grid">
+        <div class="kpi">
+          <div class="lab">Revenue (demo)</div>
+          <div class="num">Rs. 350,000</div>
+          <div class="sub">Last 30 days</div>
+        </div>
+        <div class="kpi">
+          <div class="lab">Recent Orders</div>
+          <div class="num">124</div>
+          <div class="sub">Past 7 days</div>
+        </div>
+        <div class="kpi">
+          <div class="lab">Visitors</div>
+          <div class="num">2,540</div>
+          <div class="sub">Past 7 days</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="remarkable">
+    <div class="container">
+      <h2>Most Popular Products</h2>
+      <p class="subtitle">Your top-selling crafts at a glance.</p>
+      <div class="deck-wrap">
+        <div class="deck" id="deck">
+          <article class="deck-card is-active">
+            <img src="../assets/shop1.png" alt="Handloom Saree — Sand Dunes">
+            <div class="cap">
+              <h3>Handloom Saree — Sand Dunes</h3>
+              <p>Natural-dyed handloom saree crafted in Kurunegala.</p>
+            </div>
+          </article>
+          <article class="deck-card">
+            <img src="../assets/shop2.png" alt="Ambalangoda Mask — Guardian">
+            <div class="cap">
+              <h3>Ambalangoda Mask — Guardian</h3>
+              <p>Traditional Raksha mask hand-painted in Galle.</p>
+            </div>
+          </article>
+          <article class="deck-card">
+            <img src="../assets/shop3.png" alt="Brass Oil Lamp — Peacock">
+            <div class="cap">
+              <h3>Brass Oil Lamp — Peacock</h3>
+              <p>Filigree brass craftsmanship, inspired by Kandyan art.</p>
+            </div>
+          </article>
+          <article class="deck-card">
+            <img src="../assets/shop4.png" alt="Pottery Set — Terracotta">
+            <div class="cap">
+              <h3>Pottery Set — Terracotta</h3>
+              <p>Warm terracotta clay set—everyday artisan homeware.</p>
+            </div>
+          </article>
+          <article class="deck-card">
+            <img src="../assets/shop5.png" alt="Laksha Keepsake Box">
+            <div class="cap">
+              <h3>Laksha Keepsake Box</h3>
+              <p>Classic lacquer work with bold geometric patterns.</p>
+            </div>
+          </article>
+        </div>
+        <div class="deck-nav">
+          <button class="deck-btn prev" type="button" aria-label="Previous">&
+          <button class="deck-btn next" type="button" aria-label="Next">&
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+  <div class="kpi-wrap" style="margin-top:14px">
+    <div class="kpi">
+      <div class="label">Today Sales</div>
+      <div class="value" id="kpiSales">LKR 15,000</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Pending Orders</div>
+      <div class="value" id="kpiOrders">4</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Upcoming Sessions</div>
+      <div class="value" id="kpiSessions">2</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Low Stock</div>
+      <div class="value" id="kpiLow">3</div>
+    </div>
+  </div>
+
+
+
+  <div class="grid grid-2" style="margin-top:14px">
+    <div class="card">
+      <div class="card-body">
+        <div class="section-title">
+          <h2>Recent Orders</h2>
+          <div class="sub">Latest purchases and statuses</div>
+        </div>
+        <div class="scroll-x">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Product</th>
+                <th>Customer</th>
+                <th>Status</th>
+                <th>Total</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody id="ordersBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <div class="section-title">
+          <h2>Remarkable Creations</h2>
+          <div class="sub">Your featured crafts & experiences</div>
+        </div>
+        <div class="grid grid-2" id="featured">
+          <div class="card product-card"><img src="../assets/pic4.jpg">
+            <div class="card-body">
+              <div class="title">Heritage Loom Work</div>
+              <div class="meta">Handloom • Natural dyes</div>
+            </div>
+          </div>
+          <div class="card product-card"><img src="../assets/pic5.jpg">
+            <div class="card-body">
+              <div class="title">Mask Crafting</div>
+              <div class="meta">Wood carving • Paint</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-2" style="margin-top:14px">
+    <div class="card">
+      <div class="card-body">
+        <div class="section-title">
+          <h2>My Products</h2><a class="btn" href="artisan-products.html">Manage</a>
+        </div>
+        <div class="grid grid-2" data-products></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <div class="section-title">
+          <h2>My Experiences</h2><a class="btn" href="artisan-experiences.html">Manage</a>
+        </div>
+        <div class="grid grid-2" data-experiences></div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+  <div class="overlay"></div>
+  <div class="drawer"></div>
+  <script src="../assets/js/artisan.js"></script>
+
+  <script>
+    document.querySelectorAll('.btn').forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        var r = document.createElement('span');
+        var rect = this.getBoundingClientRect();
+        var x = e.clientX - rect.left; var y = e.clientY - rect.top;
+        r.className = 'ripple'; r.style.left = x + 'px'; r.style.top = y + 'px';
+        this.appendChild(r); setTimeout(function () { r.remove(); }, 600);
+      });
+    });
+  </script>
+
+</body>
+
+</html>

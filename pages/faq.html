@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Heritage • FAQ</title>
+  <link rel="stylesheet" href="../assets/css/heritage.css">
+  <link rel="stylesheet" href="../assets/css/artisan.css">
+</head>
+<body class="artisan-app">
+
+<header class="header">
+  <div class="wrap" style="display:flex;align-items:center;gap:14px;justify-content:space-between;max-width:var(--container);margin:0 auto;padding:12px">
+    <a href="/index.php" class="brand" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit">
+      <img class="logo" src="../assets/logo.png" alt="Heritage" style="height:40px;width:auto"/>
+      <b>Heritage • Artisan</b>
+    </a>
+    <nav class="links" style="display:flex;gap:14px;align-items:center">
+      <a href="artisan-dashboard.html">Dashboard</a>
+      <a href="artisan-products.html">My Products</a>
+      <a class="btn btn-gold" href="artisan-product-new.html" style="padding:8px 12px;border-radius:999px">Add Product</a>
+      <a href="artisan-experiences.html">My Experiences</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+      <a href="../index.php">Storefront</a>
+    </nav>
+  </div>
+</header>
+<div class="masthead-spacer"></div>
+<script>const _h=document.querySelector('.header'); const _s=()=>_h&&_h.classList.toggle('scrolled',scrollY>4); addEventListener('scroll',_s); _s();</script>
+
+<div class="container">
+  <section class="faq-hero">
+    <div>
+      <div>
+        <span class="faq-kicker">FAQ</span>
+        <h1>Answers for artisans</h1>
+        <p class="muted">Publishing crafts, enabling workshops, payouts, verification and more. Use search or filter by topic.</p>
+        <div class="faq-toolbar">
+          <div class="faq-search">
+            <input id="faqSearch" type="search" placeholder="Search: payouts, booking, inventory…" aria-label="Search FAQ">
+          </div>
+          <div class="faq-filter" id="faqFilter">
+            <span class="chip active" data-topic="all">All</span>
+            <span class="chip" data-topic="products">Products</span>
+            <span class="chip" data-topic="experiences">Experiences</span>
+            <span class="chip" data-topic="payouts">Payouts</span>
+            <span class="chip" data-topic="account">Account</span>
+          </div>
+        </div>
+      </div>
+      <div class="faq-visual">
+        <div class="faq-card"><img src="../assets/fangrid2.png" alt="Craft montage"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="faq-grid">
+      <div>
+        <div class="accordion" id="faqList">
+          <details class="qa" data-topic="products" id="publish">
+            <summary><span class="tag">Products</span><span class="q">How do I publish a craft?</span></summary>
+            <div class="a">Add a product with title, category, price, stock and images. When ready, toggle it to Published. You can edit at any time.</div>
+          </details>
+          <details class="qa" data-topic="experiences" id="enable-exp">
+            <summary><span class="tag">Experiences</span><span class="q">How do I enable workshop booking?</span></summary>
+            <div class="a">When adding or editing a product, tick <b>Offer an experience</b> and fill the date, duration and max seats. You can add multiple dates later.</div>
+          </details>
+          <details class="qa" data-topic="payouts" id="fees">
+            <summary><span class="tag">Payouts</span><span class="q">What are the fees & payout cycle?</span></summary>
+            <div class="a">A transparent platform fee is applied per order/booking. Payouts group weekly; you’ll see statements in your dashboard.</div>
+          </details>
+          <details class="qa" data-topic="account" id="verify">
+            <summary><span class="tag">Account</span><span class="q">How does verification work?</span></summary>
+            <div class="a">We review identity, craft history and samples. Verified profiles get a badge that boosts buyer trust.</div>
+          </details>
+        </div>
+      </div>
+      <aside>
+        <div class="side-card">
+          <h3 style="margin:0 0 8px">Still need help?</h3>
+          <p class="muted" style="margin:0 0 12px">Reach us and we’ll reply fast.</p>
+          <a class="btn btn-gold" href="contact.html">Contact support</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+</div>
+
+<script>
+(function() { 
+  const list = document.getElementById('faqList');
+  const qas = [...list.querySelectorAll('.qa')];
+  const search = document.getElementById('faqSearch');
+  const chips = document.getElementById('faqFilter');
+  function apply(){ 
+    const query = (search.value||'').toLowerCase().trim();
+    const active = chips.querySelector('.chip.active')?.dataset.topic || 'all';
+    qas.forEach(d=>{
+      const topic = d.dataset.topic;
+      const text = (d.querySelector('.q').textContent + ' ' + d.querySelector('.a').textContent).toLowerCase();
+      const hit = (!query || text.includes(query)) && (active==='all' || topic===active);
+      d.style.display = hit ? '' : 'none';
+      if(!hit) d.open=false;
+    });
+  }
+  chips.addEventListener('click', e=>{ const c=e.target.closest('.chip'); if(!c) return; chips.querySelectorAll('.chip').forEach(x=>x.classList.remove('active')); c.classList.add('active'); apply(); });
+  search.addEventListener('input', apply);
+})();
+</script>
+</body>
+</html>
