@@ -1,4 +1,4 @@
-# Heritage — Full Build (Frontend + Backend)
+# Group Z - Heritage — Full Build (Frontend + Backend)
 
 This package adds a complete PHP backend on top of your uploaded frontend. It uses your **`schema.sql`** (tables like `users`, `products`, `experiences`, `orders`, `bookings`, etc.) and exposes clean JSON APIs that the existing pages auto‑bind to. schema
 
