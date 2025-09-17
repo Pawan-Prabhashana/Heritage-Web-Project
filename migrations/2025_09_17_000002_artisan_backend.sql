@@ -1,0 +1,31 @@
+-- migrations/2025_09_17_000002_artisan_backend.sql
+CREATE TABLE IF NOT EXISTS product_images (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  product_id INT NOT NULL,
+  url VARCHAR(255) NOT NULL,
+  is_primary TINYINT(1) NOT NULL DEFAULT 0,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE IF NOT EXISTS product_variants (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  product_id INT NOT NULL,
+  attr_name VARCHAR(120) NOT NULL,
+  attr_value VARCHAR(160) NOT NULL,
+  price_delta DECIMAL(12,2) NOT NULL DEFAULT 0,
+  stock_delta INT NOT NULL DEFAULT 0,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE IF NOT EXISTS low_stock_alerts (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  product_id INT NOT NULL,
+  threshold INT NOT NULL DEFAULT 5,
+  emailed TINYINT(1) NOT NULL DEFAULT 0,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ALTER TABLE orders
+  ADD COLUMN IF NOT EXISTS artisan_status ENUM('pending','accepted','declined','fulfilled') NOT NULL DEFAULT 'pending';
+ALTER TABLE bookings
+  ADD COLUMN IF NOT EXISTS artisan_status ENUM('pending','accepted','declined','completed') NOT NULL DEFAULT 'pending';
