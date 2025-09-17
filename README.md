@@ -1,4 +1,4 @@
-# Heritage (Updated Build)
+# Group Z - Heritage (Updated Build)
 
 ## Quick Start (XAMPP on macOS)
 1. Copy this folder to: `/Applications/XAMPP/xamppfiles/htdocs/heritage`
